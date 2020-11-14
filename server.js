@@ -1,17 +1,38 @@
+// Dependencies
+// =============================================================
+var mysql = require("mysql");
+const inquirer = require("inquirer");
+const path = require("path");
+const logo = require('asciiart-logo');
+const config = require('./package.json');
 
-let mysql      = require('mysql');
-let connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : '1026',
-  database : 'department_db'
+// Logo Art
+// =============================================================
+console.log(logo(config).render());
+
+// Mysql boilerplate
+// =============================================================
+var connection = mysql.createConnection({
+    host: "localhost",
+    // Port; if not 3306
+    port: 3306,
+    // Username
+    user: "root",
+    // Password
+    password: "1026",
+    // Database
+    database: "department_db"
 });
- 
-connection.connect();
- 
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
+
+// Connect to datbase
+// =============================================================
+connection.connect((err) => {
+    //Error handling
+    if (err) throw err;
+    //Console.log connection confirmation
+    console.log("connected as id " + connection.threadId);
+    //Init function
+    // init();
 });
  
 connection.end();

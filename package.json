@@ -1,0 +1,26 @@
+{
+  "name": "employee_database",
+  "version": "1.0.0",
+  "description": "Build a database of employees that is accesible through the command line",
+  "main": "server.js",
+  "dependencies": {
+    "asciiart-logo": "^0.2.6",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrtwheeler/Employee_Database.git"
+  },
+  "author": "Jim WHeeler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jrtwheeler/Employee_Database/issues"
+  },
+  "homepage": "https://github.com/jrtwheeler/Employee_Database#readme"
+}
