@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS department_databaseDB;
+DROP DATABASE IF EXISTS department_schema_db;
 
-CREATE DATABASE department_databaseDB;
+CREATE DATABASE department_schema_db;
 
-USE department_databaseDB;
+USE department_schema_db;
 
 CREATE TABLE deparment (
   id INT NOT NULL AUTO_INCREMENT,
