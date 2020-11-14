@@ -4,13 +4,13 @@ CREATE DATABASE department_schema_db;
 
 USE department_schema_db;
 
-CREATE TABLE deparment (
+CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(45) NULL,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE deparment_role (
+CREATE TABLE department_role (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(45) NULL,
   salary DECIMAL,
