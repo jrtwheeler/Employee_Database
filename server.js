@@ -1,8 +1,7 @@
 // Dependencies
 // =============================================================
 var mysql = require("mysql");
-const inquirer = require("inquirer");
-const path = require("path");
+const init = require("./public/prompts");
 const logo = require('asciiart-logo');
 const config = require('./package.json');
 
@@ -21,7 +20,7 @@ var connection = mysql.createConnection({
     // Password
     password: "1026",
     // Database
-    database: "department_db"
+    database: "department_schema_db"
 });
 
 // Connect to datbase
@@ -32,7 +31,9 @@ connection.connect((err) => {
     //Console.log connection confirmation
     console.log("connected as id " + connection.threadId);
     //Init function
-    // init();
+    init.init();
 });
  
 connection.end();
+
+
