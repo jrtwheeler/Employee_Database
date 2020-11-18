@@ -69,7 +69,7 @@ function init() {
                     break;
 
                 case "View All Employees By Manager":
-                    deleteEmployee();
+                    viewManager();
                     break;
 
                 case "Add Employee":
@@ -119,9 +119,15 @@ function view() {
     });
 }
 
-function deleteEmployee() {
-    console.log("delete");
-    init();
+function viewManager() {
+    var query = "SELECT manager_id FROM employee";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i]);
+        }
+        init();
+    });
 }
 
 function addEmployee() {
@@ -130,8 +136,14 @@ function addEmployee() {
 }
 
 function removeEmployee() {
-    console.log("removeEmployee");
-    init();
+    var query = "DELETE FROM employee WHERE first_name";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i]);
+        }
+        init();
+    });
 }
 
 function updateEmployeeRole() {
