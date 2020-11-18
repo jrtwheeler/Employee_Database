@@ -2,6 +2,7 @@
 // =============================================================
 var mysql = require("mysql");
 const inquirer = require("inquirer");
+const cTable = require('console.table');
 const logo = require("asciiart-logo");
 const config = require("./package.json");
 
