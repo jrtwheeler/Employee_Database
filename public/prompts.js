@@ -70,18 +70,27 @@ function init() {
 }
 
 function employees() {
-    var query = "SELECT name FROM department";
+    var query = "SELECT first_name, last_name FROM employee";
+    "SELECT manager_id FROM employee JOIN department ON employee.manager_id = department.id"
     connection.query(query, function (err, res) {
+        console.log(res)
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log(res[i]);
+            console.table([
+                {
+                    first_name: res[i].first_name,
+                    last_name: res[i].last_name, 
+                    department_name: res,
+                    manager_name: res
+                }
+              ])
         }
         init();
     });
 }
 
 function view() {
-    var query = "SELECT title FROM department_role";
+    var query = "SELECT first_name, last_name FROM employee SELECT role_id FROM employee JOIN department ON employee.role_id = department.id"
     connection.query(query, function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
@@ -92,7 +101,7 @@ function view() {
 }
 
 function viewManager() {
-    var query = "SELECT manager_id FROM employee";
+    var query = "SELECT first_name, last_name FROM employee SELECT role_id FROM employee JOIN department ON employee.role_id = department.id";
     connection.query(query, function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
