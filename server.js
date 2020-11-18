@@ -57,34 +57,41 @@ function init() {
                 "exit",
             ],
         })
-        .then(function (answer) {
+        .then(function (answer, err) {
             switch (answer.listPrompt) {
                 case "View All Employees":
                     console.log("view");
+                    if (err) throw err;
                     employees();
                     break;
 
                 case "View All Employees By Department":
+                    if (err) throw err;
                     view();
                     break;
 
                 case "View All Employees By Manager":
+                    if (err) throw err;
                     viewManager();
                     break;
 
                 case "Add Employee":
+                    if (err) throw err;
                     addEmployee();
                     break;
 
                 case "Remove Employee":
+                    if (err) throw err;
                     removeEmployee();
                     break;
 
                 case "Update Employee Role":
+                    if (err) throw err;
                     updateEmployeeRole();
                     break;
 
                 case "Update Employee Manager":
+                    if (err) throw err;
                     updateEmployeeManager();
                     break;
 
@@ -131,8 +138,22 @@ function viewManager() {
 }
 
 function addEmployee() {
-    console.log("addEmployee");
-    init();
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "Enter employee first name.",
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "Enter employee last name.",
+        }
+    ]).then(function (answer) {
+        console.log(answer.first_name);
+        console.log(answer.last_name);
+        init();
+    });
 }
 
 function removeEmployee() {
@@ -147,11 +168,27 @@ function removeEmployee() {
 }
 
 function updateEmployeeRole() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "Enter employee first name.",
+        }
+    ]).then(function (answer) {
     console.log("updateEmployeeRole");
     init();
+    })
 }
 
 function updateEmployeeManager() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "Enter employee first name.",
+        }
+    ]).then(function (answer) {
     console.log("updateEmployeeManager");
     init();
+    })
 }
