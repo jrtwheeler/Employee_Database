@@ -3,7 +3,6 @@
 var mysql = require("mysql");
 // Mysql boilerplate
 // =============================================================
-function myConnection () {
 var connection = mysql.createConnection({
     host: "localhost",
     // Port; if not 3306
@@ -24,8 +23,5 @@ connection.connect((err) => {
     //Console.log connection confirmation
     console.log("connected as id " + connection.threadId);
 });
-
-connection.end();
-} 
-// connection.end();
-exports.myConnection = myConnection;
+// Export connection for our ORM to use.
+module.exports = connection;
