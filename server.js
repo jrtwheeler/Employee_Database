@@ -109,8 +109,14 @@ function employees() {
 }
 
 function view() {
-    console.log("view");
-    init();
+    var query = "SELECT title FROM department_role";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i]);
+        }
+        init();
+    });
 }
 
 function deleteEmployee() {
