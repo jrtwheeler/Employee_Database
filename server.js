@@ -2,8 +2,8 @@
 // =============================================================
 var mysql = require("mysql");
 const inquirer = require("inquirer");
-const logo = require('asciiart-logo');
-const config = require('./package.json');
+const logo = require("asciiart-logo");
+const config = require("./package.json");
 
 // Logo Art
 // =============================================================
@@ -22,7 +22,7 @@ var connection = mysql.createConnection({
     // Password
     password: "1026",
     // Database
-    database: "department_schema_db"
+    database: "department_schema_db",
 });
 
 // Connect to datbase
@@ -36,70 +36,76 @@ connection.connect((err) => {
 
 // Connect to datbase
 // =============================================================
-init.init(connection);
-connection.end();
+init();
 
 // Connect to datbase
 // =============================================================
-function init(connection) {
+function init() {
     inquirer
         .prompt({
             name: "listPrompt",
             type: "list",
-            message: "Please choose ",
-            choices: ["ADD", "VIEW", "UPDATE", "CLOSE"]
+            message: "What would you like to do?",
+            choices: [
+                "View All Employees",
+                "View All Employees By Department",
+                "View All Employees By Manager",
+                "Add Employee",
+                "Remove Employee",
+                "Update Employee Role",
+                "Update Employee Manager",
+                "exit",
+            ],
         })
         .then(function (answer) {
-            // based on their answer, either call the bid or the post functions
-            if (answer.listPrompt === "ADD") {
-                update();
-            }
-            else if (answer.listPrompt === "VIEW") {
-                view();
-            }
-            else if (answer.listPrompt === "UPDATE") {
-                deleteEmployee();
-            }
-            else {
-                connection.end();
+            switch (answer.listPrompt) {
+                case "View All Employees":
+                    console.log("view");
+                    employees();
+                    break;
+
+                case "View All Employees By Department":
+                    view();
+                    break;
+
+                case "View All Employees By Manager":
+                    deleteEmployee();
+                    break;
+
+                case "Add Employee":
+                    addEmployee();
+                    break;
+
+                case "Remove Employee":
+                    removeEmployee();
+                    break;
+
+                case "Update Employee Role":
+                    updateEmployeeRole();
+                    break;
+
+                case "Update Employee Manager":
+                    updateEmployeeManager();
+                    break;
+
+                case "exit":
+                    //Error handling
+                    if (err) throw err;
+                    connection.end();
+                    break;
             }
         });
 }
 
-function update() {
-    inquirer
-        .prompt({
-            name: "listPrompt",
-            type: "list",
-            message: "Would you like to [ADD] an auction or [BID] on an auction?",
-            choices: ["DEPARTMENT", "ROLE", "EMPLOYEE", "CLOSE"]
-        })
-        .then(function (answer) {
-            // based on their answer, either call the bid or the post functions
-            if (answer.listPrompt === "DEPARTMENT") {
-                connection.query(
-                    "INSERT INTO department SET ?",
-                    {
-                        item_name: answer.name,
-                    },
-                    function (err) {
-                        if (err) throw err;
-                        console.log("Your department was added!");
-                        // re-prompt the user for if they want to bid or post
-                        init();
-                    }
-                );
-            }
-            else if (answer.listPrompt === "ROLE") {
-                view();
-            }
-            else if (answer.listPrompt === "EMPLOYEE") {
-                deleteEmployee();
-            }
-            else {
-                connection.end();
-            }
-        });
+function employees() {
+    var query = "SELECT name FROM department";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.log(res[i]);
+        }
+        init();
+    });
 }
 
 function view() {
@@ -112,3 +118,22 @@ function deleteEmployee() {
     init();
 }
 
+function addEmployee() {
+    console.log("addEmployee");
+    init();
+}
+
+function removeEmployee() {
+    console.log("removeEmployee");
+    init();
+}
+
+function updateEmployeeRole() {
+    console.log("updateEmployeeRole");
+    init();
+}
+
+function updateEmployeeManager() {
+    console.log("updateEmployeeManager");
+    init();
+}
