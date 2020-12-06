@@ -16,7 +16,7 @@ CREATE TABLE role (
   salary DECIMAL,
   department_id INT, -- derived from one row on department table
   PRIMARY KEY (id), -- must be unique && cannot be null
-  FOREIGN KEY (department_id) REFERENCES department(id) -- must exist on base table
+  FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE cascade -- must exist on base table
 );
 
 CREATE TABLE employee (
@@ -26,8 +26,8 @@ CREATE TABLE employee (
   role_id INT,
   manager_id INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (role_id) references role(id),
-  FOREIGN KEY (manager_id) REFERENCES employee(id)
+  FOREIGN KEY (role_id) references role(id) ON DELETE cascade,
+  FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE cascade
 );
 
 
