@@ -29,3 +29,6 @@ CREATE TABLE employee (
   FOREIGN KEY (role_id) references role(id),
   FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
+
+
+
